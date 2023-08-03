@@ -2,6 +2,7 @@
 
 using Android.App;
 using Android.Runtime;
+using Microsoft.Maui.Handlers;
 
 namespace MauiApp2;
 
@@ -13,5 +14,15 @@ public class MainApplication : MauiApplication
 	{
 	}
 
-	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+	protected override MauiApp CreateMauiApp() {
+
+        ToolbarHandler.Mapper.AppendToMapping("CustomToolbarMapper", (handler, toolbar) =>
+        {
+            var materialToolbar = handler.PlatformView;
+            materialToolbar.ContentInsetStartWithNavigation = 0;
+            materialToolbar.TitleCentered = true;
+        });
+
+        return MauiProgram.CreateMauiApp();
+    }
 }
